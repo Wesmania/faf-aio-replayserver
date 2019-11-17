@@ -31,6 +31,7 @@ class Bookkeeper:
     async def save_replay(self, game_id, stream):
         try:
             logger.debug(f"Saving replay {game_id}")
+            logger.info(f"Replay {game_id} is {len(stream.header.data) + len(stream.data)} bytes in size")
             await self._saver.save_replay(game_id, stream)
             logger.debug(f"Saved replay {game_id}")
             metrics.saved_replays.inc()
